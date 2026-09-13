@@ -1,0 +1,188 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f6f8;
+  color: #1c1c1e;
+}
+
+.app-shell {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.new-recharge-form {
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: end;
+}
+
+.new-recharge-form h2 {
+  grid-column: 1 / -1;
+  font-size: 16px;
+  margin: 0;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+.new-recharge-form button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 8px 20px;
+  background: #2f6fed;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.new-recharge-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.field-error {
+  color: #c62828;
+  font-size: 12px;
+}
+
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+select,
+input[type="date"],
+input[type="text"],
+input[type="number"] {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.btn-secondary {
+  padding: 7px 14px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.recharge-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recharge-table th,
+.recharge-table td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.recharge-table th {
+  background: #fafafa;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.state-message {
+  text-align: center;
+  padding: 24px;
+  color: #666;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+}
+
+.state-error {
+  color: #c62828;
+}
+
+.state-success {
+  color: #1a7f37;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.pagination-bar button {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.pagination-bar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
