@@ -1,5 +1,8 @@
 FROM richarvey/nginx-php-fpm:latest
 
+# Remove pre-existing default site configs
+RUN rm -rf /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/nginx/conf.d/*
+
 # Set working directory to temporary build location
 WORKDIR /tmp/laravel-build
 
@@ -19,6 +22,7 @@ RUN rm -rf /var/www/html/* && \
 
 # Copy custom Nginx configuration over default sites after file copy
 COPY nginx.conf /etc/nginx/sites-available/default.conf
+COPY nginx.conf /etc/nginx/sites-enabled/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /var/www/html
