@@ -1,28 +1,27 @@
 FROM richarvey/nginx-php-fpm:latest
 
-# Set working directory to temporary build location
-WORKDIR /tmp/laravel-build
+WORKDIR /var/www/html
+
+# Ensure the directory is completely empty for composer create-project
+RUN rm -rf /var/www/html/* /var/www/html/.* 2>/dev/null || true
 
 # Create fresh Laravel project in container
 RUN composer create-project --prefer-dist laravel/laravel:^11.0 . --no-interaction
 
 # Copy repository custom backend files into Laravel framework structure
-COPY app /tmp/laravel-build/app
-COPY database /tmp/laravel-build/database
-COPY routes /tmp/laravel-build/routes
-COPY config /tmp/laravel-build/config
-COPY public /tmp/laravel-build/public
+COPY app /var/www/html/app
+COPY database /var/www/html/database
+COPY bootstrap /var/www/html/bootstrap
+COPY routes /var/www/html/routes
+COPY config /var/www/html/config
+COPY ca-cert.pem /var/www/html/ca-cert.pem
+# IMPORTANT: COPY public contents directly into the public folder
+COPY public/ /var/www/html/public/
 
-# Move complete Laravel application to /var/www/html
-RUN rm -rf /var/www/html/* && \
-    cp -r /tmp/laravel-build/* /tmp/laravel-build/.* /var/www/html/ 2>/dev/null || true
-
-# Copy custom Nginx configuration over default sites after file copy
+# Copy custom Nginx configuration over default sites
 COPY nginx.conf /etc/nginx/sites-available/default.conf
 COPY nginx.conf /etc/nginx/sites-enabled/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-WORKDIR /var/www/html
 
 ENV WEBROOT /var/www/html/public
 ENV PORT 80
