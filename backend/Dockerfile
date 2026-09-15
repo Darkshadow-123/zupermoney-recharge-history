@@ -16,8 +16,9 @@ COPY routes /tmp/laravel-build/routes
 COPY config /tmp/laravel-build/config
 COPY public /tmp/laravel-build/public
 
-# Copy custom Nginx configuration
+# Copy custom Nginx configuration to enabled sites
 COPY nginx.conf /etc/nginx/sites-available/default.conf
+COPY nginx.conf /etc/nginx/sites-enabled/default.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Move complete Laravel application to /var/www/html
