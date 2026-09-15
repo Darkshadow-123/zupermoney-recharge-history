@@ -11,6 +11,7 @@ COPY app /tmp/laravel-build/app
 COPY database /tmp/laravel-build/database
 COPY routes /tmp/laravel-build/routes
 COPY config /tmp/laravel-build/config
+COPY public /tmp/laravel-build/public
 
 # Move complete Laravel application to /var/www/html
 RUN rm -rf /var/www/html/* && \
