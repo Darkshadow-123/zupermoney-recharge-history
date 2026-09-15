@@ -7,7 +7,12 @@ ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
 
-# Laravel permissions
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Ensure storage and bootstrap/cache directories exist before setting permissions
+RUN mkdir -p /var/www/html/storage/framework/views \
+             /var/www/html/storage/framework/sessions \
+             /var/www/html/storage/framework/cache \
+             /var/www/html/storage/logs \
+             /var/www/html/bootstrap/cache && \
+    chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
