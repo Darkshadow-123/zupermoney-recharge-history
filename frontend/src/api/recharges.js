@@ -24,5 +24,9 @@ export async function createRecharge(payload) {
 
 export async function fetchRetailers() {
   const response = await client.get('/retailers');
-  return response.data; // [{ id, name }, ...]
+  // Normalize response whether returned directly as an array or wrapped in a data key
+  const res = response.data;
+  if (Array.isArray(res)) return res;
+  if (Array.isArray(res?.data)) return res.data;
+  return [];
 }
