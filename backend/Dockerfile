@@ -1,15 +1,30 @@
 FROM richarvey/nginx-php-fpm:latest
 
-COPY . /var/www/html
+# Set working directory to temporary build location
+WORKDIR /tmp/laravel-build
+
+# Create fresh Laravel project in container
+RUN composer create-project --prefer-dist laravel/laravel:^11.0 . --no-interaction
+
+# Copy repository custom backend files into Laravel framework structure
+COPY app /tmp/laravel-build/app
+COPY database /tmp/laravel-build/database
+COPY routes /tmp/laravel-build/routes
+COPY config /tmp/laravel-build/config
+
+# Move complete Laravel application to /var/www/html
+RUN rm -rf /var/www/html/* && \
+    cp -r /tmp/laravel-build/* /tmp/laravel-build/.* /var/www/html/ 2>/dev/null || true
+
+WORKDIR /var/www/html
 
 ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
 ENV ARTISAN_MIGRATE 1
-ENV NGINX_SITES_CONF /var/www/html/nginx.conf
 
-# Ensure storage and bootstrap/cache directories exist before setting permissions
+# Ensure permissions for Laravel storage and cache
 RUN mkdir -p /var/www/html/storage/framework/views \
              /var/www/html/storage/framework/sessions \
              /var/www/html/storage/framework/cache \
