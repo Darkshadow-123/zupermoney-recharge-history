@@ -1,4 +1,4 @@
-FROM richarvey/nginx-php-fpm:1.10.4
+FROM richarvey/nginx-php-fpm:latest
 
 # Set working directory to temporary build location
 WORKDIR /tmp/laravel-build
