@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-| These are auto-prefixed with /api by Laravel's RouteServiceProvider,
-| so the final endpoints are GET /api/recharges and POST /api/recharges.
 */
 
+// Support both /api/recharges and /recharges directly for maximum compatibility
 Route::get('/recharges', [RechargeController::class, 'index']);
 Route::post('/recharges', [RechargeController::class, 'store']);
-
-// A tiny helper endpoint so the frontend's retailer filter dropdown can be
-// populated without hardcoding retailer IDs. Not required by the spec but
-// keeps the "filter by retailer_id" control usable out of the box.
 Route::get('/retailers', function () {
+    return \App\Models\Retailer::select('id', 'name')->orderBy('name')->get();
+});
+Route::get('/api/recharges', [RechargeController::class, 'index']);
+Route::post('/api/recharges', [RechargeController::class, 'store']);
+Route::get('/api/retailers', function () {
     return \App\Models\Retailer::select('id', 'name')->orderBy('name')->get();
 });
