@@ -7,6 +7,7 @@ ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
 ENV ARTISAN_MIGRATE 1
+ENV NGINX_SITES_CONF /var/www/html/nginx.conf
 
 # Ensure storage and bootstrap/cache directories exist before setting permissions
 RUN mkdir -p /var/www/html/storage/framework/views \
