@@ -11,11 +11,14 @@ COPY app /tmp/laravel-build/app
 COPY database /tmp/laravel-build/database
 COPY routes /tmp/laravel-build/routes
 COPY config /tmp/laravel-build/config
-COPY nginx.conf /etc/nginx/sites-available/default.conf
 
 # Move complete Laravel application to /var/www/html
 RUN rm -rf /var/www/html/* && \
     cp -r /tmp/laravel-build/* /tmp/laravel-build/.* /var/www/html/ 2>/dev/null || true
+
+# Copy custom Nginx configuration over default sites in both locations used by richarvey image
+COPY nginx.conf /etc/nginx/sites-available/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /var/www/html
 
@@ -24,6 +27,7 @@ ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
 ENV ARTISAN_MIGRATE 1
+ENV ARTISAN_SEED 1
 
 # Ensure permissions for Laravel storage and cache
 RUN mkdir -p /var/www/html/storage/framework/views \
