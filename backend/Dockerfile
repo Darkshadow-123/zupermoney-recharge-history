@@ -1,7 +1,4 @@
-FROM richarvey/nginx-php-fpm:latest
-
-# Remove pre-existing default site configs
-RUN rm -rf /etc/nginx/sites-available/* /etc/nginx/sites-enabled/* /etc/nginx/conf.d/*
+FROM richarvey/nginx-php-fpm:1.10.4
 
 # Set working directory to temporary build location
 WORKDIR /tmp/laravel-build
