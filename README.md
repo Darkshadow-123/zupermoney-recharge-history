@@ -45,7 +45,7 @@ Laravel app.
    installer generates its own file — replace its contents with ours).
 
 4. **Configure the database** in `.env`:
-   ```
+   ```env
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
@@ -53,7 +53,7 @@ Laravel app.
    DB_USERNAME=root
    DB_PASSWORD=
    ```
-   Create the database first: `mysql -u root -e "CREATE DATABASE zupermoney_recharges"`
+   *(A sample `backend/.env.example` file is included in `backend/`).*
 
 5. **Migrate and seed:**
    ```bash
